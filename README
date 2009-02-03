@@ -1,15 +1,19 @@
-h1.Munin on Rails
+h1. Munin on Rails
+
 An advanced frontend for Munin:http://munin.projects.linpro.no/ graphs.
 
-h2.Features
+h2. Features
 
-h3.Done
+h3. Done
+
 None, yet :)
 
-h3.Planned
+h3. Planned
+
 * Multiple Munin installations
 * Server groups
 * Custom pages, which allows you to select graphs and servers, and quickly access it
 * Personal accounts, with permissions to acces to hosts
 * User groups, with access rights
 * "Monitoring mode", to display graphs on a monitoring screens (displays each graph for 10 seconds)
+
