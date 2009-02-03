@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  url: MyString
+  http_user: MyString
+  http_password: MyString
+  last_fetched: 2009-02-03 13:52:34
+
+two:
+  url: MyString
+  http_user: MyString
+  http_password: MyString
+  last_fetched: 2009-02-03 13:52:34
