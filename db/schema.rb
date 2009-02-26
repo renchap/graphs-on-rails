@@ -9,13 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090203131824) do
+ActiveRecord::Schema.define(:version => 20090226123417) do
 
   create_table "munin_servers", :force => true do |t|
     t.string   "url"
     t.string   "http_user"
     t.string   "http_password"
     t.datetime "last_fetched"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "plugins", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "server_plugins", :force => true do |t|
+    t.integer  "server_id"
+    t.integer  "plugin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
