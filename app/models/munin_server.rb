@@ -3,15 +3,21 @@ require 'open-uri'
 class MuninServer < ActiveRecord::Base
   has_many :servers
 
+  def fetch_page page = ''
+    url = self.url+'/'+page
+    if self.http_user
+      open(url, :http_basic_authentication => [self.http_user, self.http_password])
+    else
+      open(url)
+    end
+   
+  end
+
   def fetch_servers_list
     
     # Fetch the munin homepage
-    if self.http_user
-      content = open(self.url, :http_basic_authentication => [self.http_user, self.http_password])
-    else
-      content = open(self.url)
-    end
-    
+    content = self.fetch_page
+
     doc = Hpricot(content)
     
     # Search all servers
