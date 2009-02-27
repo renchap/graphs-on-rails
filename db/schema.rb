@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090226123417) do
+ActiveRecord::Schema.define(:version => 20090227122957) do
 
   create_table "munin_servers", :force => true do |t|
     t.string   "url"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20090226123417) do
     t.integer  "munin_server_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "group"
   end
 
   create_table "users", :force => true do |t|

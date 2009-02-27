@@ -18,7 +18,7 @@ class MuninServer < ActiveRecord::Base
     (doc/"span.host"/"a").each do |server|
       server_name = server.inner_html
       unless self.servers.find(:first, :conditions => { :hostname => server_name })
-        self.servers.create(:hostname => server_name)
+        self.servers.create(:hostname => server_name, :group => server['href'].split('/')[0])
       end
     end
     return true
