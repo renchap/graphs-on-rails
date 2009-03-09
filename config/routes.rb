@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   map.root :controller => 'sessions', :action => 'new'
-
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  
+  map.resources :plugins, :only => [:index, :show]
+  map.resources :servers, :only => [:index, :show]
 end
