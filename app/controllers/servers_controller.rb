@@ -13,6 +13,7 @@ class ServersController < ApplicationController
       begin
         @server = Server.find(params['id'])
       rescue(ActiveRecord::RecordNotFound)
+        flash[:error] = 'Server not found'
         redirect_to servers_path
         false
       end
