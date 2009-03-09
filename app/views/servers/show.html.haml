@@ -1,2 +1,5 @@
-<h1>Servers#show</h1>
-<p>Find me in app/views/servers/show.html.erb</p>
+%h1= @server.hostname
+
+%h2 Plugins
+%ul
+  = render :partial => 'plugins/plugin', :collection => @server.plugins.sort_by { |p| p.name }
