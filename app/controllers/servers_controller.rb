@@ -1,5 +1,8 @@
 class ServersController < ApplicationController
   before_filter :find_by_param, :except => [:index]
+
+  rescue_from(ActiveRecord::RecordNotFound) { flash[:error] = 'Server not found' and redirect_to servers_path}
+
   def index
     @servers = Server.all(:order => 'hostname ASC')
   end
@@ -10,12 +13,6 @@ class ServersController < ApplicationController
 
   protected
     def find_by_param
-      begin
-        @server = Server.find(params['id'])
-      rescue(ActiveRecord::RecordNotFound)
-        flash[:error] = 'Server not found'
-        redirect_to servers_path
-        false
-      end
+      @server = Server.find(params['id'])
     end
 end

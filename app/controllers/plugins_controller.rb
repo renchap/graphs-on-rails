@@ -1,5 +1,7 @@
 class PluginsController < ApplicationController
   before_filter :find_by_param, :except => [:index]
+  
+  rescue_from(ActiveRecord::RecordNotFound) { flash[:error] = 'Plugin not found' and redirect_to plugins_path}
   def index
     @plugins = Plugin::all(:order => 'name ASC')
   end
@@ -9,12 +11,6 @@ class PluginsController < ApplicationController
 
   protected
     def find_by_param
-      begin
-        @plugin = Plugin.find(params['id'])
-      rescue ActiveRecord::RecordNotFound
-        flash[:error] = 'Plugin not found'
-        redirect_to plugins_path
-	      false
-      end
+      @plugin = Plugin.find(params['id'])
     end
 end
