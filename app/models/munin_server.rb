@@ -2,6 +2,7 @@ require 'open-uri'
 
 class MuninServer < ActiveRecord::Base
   has_many :servers
+  validates_presence_of :url, :on => :save
 
   def fetch_page page = ''
     url = self.url+'/'+page

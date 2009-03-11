@@ -14,7 +14,7 @@ class PluginsController < ApplicationController
       rescue ActiveRecord::RecordNotFound
         flash[:error] = 'Plugin not found'
         redirect_to plugins_path
-	false
+	      false
       end
     end
 end

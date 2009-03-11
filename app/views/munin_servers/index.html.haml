@@ -1,0 +1,5 @@
+%h1 Munin Servers
+%ul
+  = render :partial => 'munin_server', :collection => @munin_servers
+  
+= link_to('New', new_munin_server_path)
