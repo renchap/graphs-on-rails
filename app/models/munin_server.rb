@@ -28,6 +28,5 @@ class MuninServer < ActiveRecord::Base
         self.servers.create(:hostname => server_name, :group => server['href'].split('/')[0])
       end
     end
-    return true
   end
 end

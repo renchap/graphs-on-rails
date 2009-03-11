@@ -19,6 +19,5 @@ class Server < ActiveRecord::Base
         self.plugins << plugin
       end
     end
-    return true
   end
 end
