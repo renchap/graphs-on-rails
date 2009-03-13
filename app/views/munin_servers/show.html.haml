@@ -4,3 +4,7 @@
 %p= 'HTTP Password :'+@munin_server.http_password
 
 = link_to('Edit', edit_munin_server_path(@munin_server))
+
+%h2 Servers
+%ul
+  = render :partial => 'servers/server', :collection => @munin_server.servers
