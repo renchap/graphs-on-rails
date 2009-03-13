@@ -10,7 +10,10 @@
         #title
           %h1
             = link_to_unless_current 'Munin on Rails', root_path
-            
+        
+        #userbar
+          = render :partial => 'users/user_bar'
+        
         #menu
           %ul
             %li= link_to('Munin Servers', munin_servers_path)
