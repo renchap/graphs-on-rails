@@ -10,6 +10,12 @@
         #title
           %h1
             = link_to_unless_current 'Munin on Rails', root_path
+            
+        #menu
+          %ul
+            %li= link_to('Munin Servers', munin_servers_path)
+            %li= link_to('Servers', servers_path)
+            %li= link_to('Plugins', plugins_path)
       
       #content
         - [:notice, :warning, :message, :error].each do |f|
