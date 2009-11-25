@@ -1,7 +1,0 @@
-%h1= @server.hostname
-
-= "Munin Server : " + link_to(@server.munin_server.url, @server.munin_server)
-
-%h2 Plugins
-%ul
-  = render :partial => 'plugins/plugin', :collection => @server.plugins.sort_by { |p| p.name }
