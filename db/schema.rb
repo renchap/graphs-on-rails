@@ -9,10 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091125222134) do
+ActiveRecord::Schema.define(:version => 20091125222851) do
 
   create_table "hosts", :force => true do |t|
     t.string   "hostname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rrd_files", :force => true do |t|
+    t.integer  "host_id"
+    t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

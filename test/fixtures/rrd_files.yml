@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  host_id: 1
+  path: MyString
+
+two:
+  host_id: 1
+  path: MyString
