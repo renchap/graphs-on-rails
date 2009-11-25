@@ -1,19 +1,8 @@
-h1. Munin on Rails
+h1. RRD on Rails
 
-An advanced frontend for Munin:http://munin.projects.linpro.no/ graphs.
+An advanced web interface to display RRD files.
+http://github.com/renchap/rrd-on-rails
 
-h2. Features
+h2. Credits
 
-h3. Done
-
-None, yet :)
-
-h3. Planned
-
-* Multiple Munin installations
-* Server groups
-* Custom pages, which allows you to select graphs and servers, and quickly access it
-* Personal accounts, with permissions to acces to hosts
-* User groups, with access rights
-* "Monitoring mode", to display graphs on a monitoring screens (displays each graph for 10 seconds)
-
+* Renaud Chaput
