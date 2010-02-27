@@ -1,7 +1,7 @@
 class CreateMetrics < ActiveRecord::Migration
   def self.up
     create_table :metrics do |t|
-      t.name :string
+      t.string :name
       t.integer :host_id
 
       t.timestamps
