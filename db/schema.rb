@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20100227202232) do
   end
 
   create_table "metrics", :force => true do |t|
+    t.string   "name"
     t.integer  "host_id"
     t.datetime "created_at"
     t.datetime "updated_at"
