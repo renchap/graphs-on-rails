@@ -1,8 +1,0 @@
-h1. RRD on Rails
-
-An advanced web interface to display RRD files.
-http://github.com/renchap/rrd-on-rails
-
-h2. Credits
-
-* Renaud Chaput
