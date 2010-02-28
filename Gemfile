@@ -4,6 +4,8 @@ source 'http://gemcutter.org'
 
 gem "rails", "3.0.0.beta"
 
+gem "haml"
+
 ## Bundle edge rails:
 # gem "rails", :git => "git://github.com/rails/rails.git"
 
