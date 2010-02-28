@@ -3,6 +3,8 @@ RrdOnRails::Application.routes.draw do |map|
   # first created -> highest priority.
 
   resources :hosts
+  
+  root :to => 'hosts#index'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

@@ -1,0 +1,22 @@
+!!! XML
+!!!
+%html{html_attrs}
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8'}
+    %title= page_title    
+  %body
+    #container
+      #header
+        #title
+          %h1
+            = link_to_unless_current 'RRD on Rail', root_path
+      
+      #content
+        - [:notice, :warning, :message, :error].each do |f|
+          - if flash[f]
+            %div{:class => "flash_#{f}"}
+              = flash[f]
+              
+        = yield
+
+      #footer
