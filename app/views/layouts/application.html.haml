@@ -10,6 +10,9 @@
         #title
           %h1
             = link_to_unless_current 'RRD on Rail', root_path
+        %ul#menu
+          %li= link_to 'Repositories', repositories_path
+          %li= link_to 'Hosts', hosts_path
       
       #content
         - [:notice, :warning, :message, :error].each do |f|
