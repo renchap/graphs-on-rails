@@ -3,6 +3,7 @@ RrdOnRails::Application.routes.draw do |map|
   # first created -> highest priority.
 
   resources :hosts
+  resources :repositories
   
   root :to => 'hosts#index'
 
