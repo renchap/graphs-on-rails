@@ -1,7 +1,7 @@
-require File.expand_path('../base', __FILE__)
+require File.expand_path('../rrdtool', __FILE__)
 
 module DataProvider
-  class Collectd < Base
+  class Collectd < RRDTool
     def initialize
       super('collectd', 'collectd')
     end
