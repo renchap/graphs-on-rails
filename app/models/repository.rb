@@ -1,7 +1,8 @@
 class Repository < ActiveRecord::Base
+  self.inheritance_column = 'subclass_type'
   has_many :metrics
   
-  def from_param param
+  def self.from_param(param)
     find(param)
   end
 end
