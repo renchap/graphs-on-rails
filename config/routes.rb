@@ -4,6 +4,7 @@ RrdOnRails::Application.routes.draw do |map|
 
   resources :hosts
   resources :repositories
+  resources :metrics
   
   root :to => 'hosts#index'
 

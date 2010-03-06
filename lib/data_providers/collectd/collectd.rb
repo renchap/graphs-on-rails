@@ -36,7 +36,7 @@ module DataProvider
                     h = handler.new(plugin_files)
                     host_metrics = host_metrics + h.metrics
                   else
-                    # Default handler
+                    # TODO: create a default handler
                   end
                 end
               end
@@ -45,6 +45,17 @@ module DataProvider
           end
         end
         result
+      end
+      
+      def get_data(start_date, end_date, options)
+        rrd = RRD::Base.new(options[:path])
+        results = rrd.fetch(:average, :start => start_date, :end => end_date)
+        r = Array.new
+        index = RRDTool::rrd_index_for(rrd, options[:rra]) + 1
+        results.each do |line|
+          r << [line[0], line[index]] if line[index] and !line[index].nan?
+        end
+        r
       end
       
       DataProvider.register(self)
