@@ -17,7 +17,7 @@ class Repository < ActiveRecord::Base
 
   def data_provider
     unless @data_provider
-      require File.expand_path('../../../lib/data_providers/'+self.type, __FILE__)
+      require File.expand_path("../../../lib/data_providers/#{self.type}/#{self.type}", __FILE__)
       klass = DataProvider.from_shortname(self.type)
       @data_provider = klass.new(self.path)
     end
