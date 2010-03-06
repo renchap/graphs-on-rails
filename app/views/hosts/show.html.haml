@@ -1,3 +1,7 @@
 %h2= 'Host: ' + @host.name
 
-Host details
+#metrics
+  %h3 Metrics
+  %ul
+  - @host.metrics.each do |metric|
+    %li= "#{metric.name}"
