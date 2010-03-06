@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100306150101) do
+ActiveRecord::Schema.define(:version => 20100306153400) do
 
   create_table "hosts", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20100306150101) do
     t.datetime "updated_at"
     t.integer  "repository_id"
     t.text     "options"
+    t.string   "unique_id"
   end
 
   create_table "repositories", :force => true do |t|
