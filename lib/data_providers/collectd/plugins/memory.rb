@@ -15,7 +15,7 @@ module DataProvider
             metric.name = "Memory "+File.basename(file, '.rrd').split('-')[1]
             metric.tags << 'System/Memory'
             metric.options[:path] = file
-            metric.options[:rrd] = 'value'
+            metric.options[:rra] = 'value'
           end
           r
         end

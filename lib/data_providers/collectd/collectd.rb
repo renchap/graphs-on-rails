@@ -55,6 +55,7 @@ module DataProvider
         results.each do |line|
           r << [line[0], line[index]] if line[index] and !line[index].nan?
         end
+        rrd = nil
         r
       end
       
