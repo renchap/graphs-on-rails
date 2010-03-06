@@ -6,7 +6,7 @@ module DataProvider
       end
 
       def self.register(plugin)
-        @plugins = Hash.new unless @providers
+        @plugins = Hash.new unless @plugins
         @plugins[plugin.short_name] = plugin
       end
 
@@ -16,7 +16,7 @@ module DataProvider
       
       class Base
         def self.short_name
-          self.name.downcase
+          self.name.split('::').last.downcase
         end
       end
     end
