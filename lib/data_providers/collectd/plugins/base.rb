@@ -19,6 +19,16 @@ module DataProvider
           self.name.split('::').last.downcase
         end
       end
+      
+      class MetricResult < DataProvider::Base::MetricResult
+        def unique_id
+          if @unique_id
+            @unique_id
+          else
+            "#{options[:path]}##{options[:rra]}"
+          end
+        end
+      end
     end
   end
 end

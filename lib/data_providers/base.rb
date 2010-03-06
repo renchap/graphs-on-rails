@@ -16,12 +16,11 @@ module DataProvider
     @@plugins_loaded = false
     
     class MetricResult
-      attr_reader :path, :name, :tags
+      attr_accessor :name, :tags, :options, :unique_id
       
-      def initialize(path, name, tags)
-        @name = name
-        @tags = tags
-        @path = path
+      def initialize
+        @options = Hash.new
+        @tags = Array.new
       end
     end
     

@@ -9,8 +9,23 @@ class Repository < ActiveRecord::Base
   # Scans the repository to create all metrics
   def scan
     metrics = data_provider.get_all_metrics
-    metrics.each do |metric|
-      # Create this metric
+    metrics.each do |host_name,host_metrics|
+      # Find the hostname
+      host = Host.find_or_create_by_name(host_name)
+      
+      host_metrics.each do |metric|
+        # Skip if the metric already exists
+        unless Metric.find_by_unique_id_and_repository_id(metric.unique_id, self)
+          m = Metric.new
+          m.name = metric.name
+          m.repository = self
+          m.host = host
+          m.unique_id = metric.unique_id
+          m.options = metric.options
+          m.save
+          # TODO: Handle tags
+        end
+      end
     end
   end
   

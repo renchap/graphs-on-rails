@@ -11,10 +11,11 @@ module DataProvider
         def metrics
           r = Array.new
           @files.each do |file|
-            path = file
-            name = "Memory "+File.basename(path, '.rrd').split('-')[1]
-            tags = Array.new << 'System/Memory'
-            r << DataProvider::Base::MetricResult.new(path, name, tags)
+            r << metric = MetricResult.new
+            metric.name = "Memory "+File.basename(file, '.rrd').split('-')[1]
+            metric.tags << 'System/Memory'
+            metric.options[:path] = file
+            metric.options[:rrd] = 'value'
           end
           r
         end

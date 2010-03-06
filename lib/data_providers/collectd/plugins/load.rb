@@ -7,18 +7,22 @@ module DataProvider
         def initialize(files)
           # Check that we have only one file for this plugin
           throw Exception.new('Collectd::Load plugin can have only one file') if files.size != 1
-         
+
           @files = files
         end
         
         def metrics
           r = Array.new
-          path = @files.first
-          name = "Load average"
-          tags = Array.new << 'System'
-          r << DataProvider::Base::MetricResult.new(path, name, tags)
+          {'shortterm' => 1, 'midterm' => 5, 'longterm' => 15}.each do |term,interval|
+            r << metric = MetricResult.new
+            metric.name = "Load average - #{interval} minutes average"
+            metric.tags << 'System/Load Average'
+            metric.options[:path] = @files.first
+            metric.options[:rra] = term
+          end
+          r
         end
-        
+
         Plugins.register(self)
       end
     end
