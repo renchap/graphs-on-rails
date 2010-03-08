@@ -1,9 +1,9 @@
 module ApplicationHelper
   def page_title
     if @page_title
-      @page_title + ' / RRD on Rails'
+      @page_title + ' / Graphs on Rails'
     else
-      'RRD on Rails'
+      'Graphs on Rails'
     end
   end
 end
