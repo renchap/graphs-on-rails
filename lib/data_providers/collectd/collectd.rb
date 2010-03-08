@@ -53,7 +53,7 @@ module DataProvider
         r = Array.new
         index = RRDTool::rrd_index_for(rrd, options[:rra]) + 1
         results.each do |line|
-          r << [line[0], line[index]] if line[index] and !line[index].nan?
+          r << [line[0], line[index]] if line[index] and line[index].class == Float and !line[index].nan?
         end
         rrd = nil
         r
