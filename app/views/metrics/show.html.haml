@@ -2,16 +2,26 @@
 #graph{:style => "width: 800px; height: 300px;"}
 :javascript
   $(function () {
+    function suffixFormatter(val, axis) {
+      if (val > 1000000000000)
+        return (val / 1000000000000).toFixed(axis.tickDecimals) + " TB";
+      else if (val > 1000000000)
+        return (val / 1000000000).toFixed(axis.tickDecimals) + " GB";
+      else if (val > 1000000)
+        return (val / 1000000).toFixed(axis.tickDecimals) + " MB";
+      else if (val > 1000)
+        return (val / 1000).toFixed(axis.tickDecimals) + " kB";
+      else
+        return val.toFixed(axis.tickDecimals) + " B";
+    }
+    
     var options = {
-        lines: { show: true },
-        xaxis: { mode: "time" }
+        lines: { show: true, fill: true },
+        xaxis: { mode: "time" },
+        //yaxis: { tickFormatter: suffixFormatter }
     };
-    var data = [];
     var placeholder = $("#graph");
-    var plot = $.plot(placeholder, data, options);
 
-    // fetch the data with jQuery
-    var alreadyFetched = {};
     function fetchData() {
       function onDataReceived(series) {
           $.plot(placeholder, [series], options);

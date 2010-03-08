@@ -7,7 +7,7 @@ class MetricsController < ApplicationController
       format.json do
         result = Hash.new
         result[:label] = @metric.name
-        result[:data] = @metric.get_data(Time.now-5.minutes, Time.now).map do |x|
+        result[:data] = @metric.get_data(Time.now-1.hour, Time.now).map do |x|
           [x[0]*1000,x[1]]
         end
         
