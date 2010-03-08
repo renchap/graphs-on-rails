@@ -2,6 +2,7 @@ class MetricsController < ApplicationController
   respond_to :html, :json
   def show
     @metric = Metric.from_param(params[:id])
+    @page_title = "#{@metric.host.name} / #{@metric.name}"
     respond_to do |format|
       format.html
       format.json do
