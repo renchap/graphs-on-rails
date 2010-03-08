@@ -2,6 +2,8 @@ Graphs on Rails is a WebUI to display all your monitoring graphs. It can handle 
 
 You can look at a demo here : http://graphs-on-rails.renchap.com/
 
+The application is written in Ruby, using the Ruby on Rails 3 framework (currently in bêta). The graphs rendering is done using the Flot Javascript library and jQuery.
+
 This is still a work in progress.
 
 == Data Providers
