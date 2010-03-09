@@ -10,8 +10,8 @@ This is still a work in progress.
 
 ## Features
 
-* Supports multiple data providers. These modules are easy to write, and allow you to graph what you want.
-* Does not hammers your server (graph rendering is done on client-side and on-demain)
+* Supports multiple data providers. These modules are easy to write, and allow you to graph what you want
+* Does not hammers your server (graph rendering is done on client-side and on-demand)
 * Refresh the graph every 10s
 
 ## Data Providers
