@@ -15,16 +15,13 @@ class Repository < ActiveRecord::Base
       
       host_metrics.each do |metric|
         # Skip if the metric already exists
-        unless Metric.find_by_unique_id_and_repository_id(metric.unique_id, self)
-          m = Metric.new
-          m.name = metric.name
-          m.repository = self
-          m.host = host
-          m.unique_id = metric.unique_id
-          m.options = metric.options
-          m.save
-          # TODO: Handle tags
+        m = Metric.find_or_create_by_unique_id_and_repository_id(metric.unique_id, self) do |new_metric|
+          new_metric.host = host
         end
+        m.name = metric.name
+        m.options = metric.options
+        m.save
+        # TODO: Handle tags
       end
     end
   end
