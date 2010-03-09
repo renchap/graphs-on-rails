@@ -15,7 +15,7 @@ module DataProvider
           r = Array.new
           {'shortterm' => 1, 'midterm' => 5, 'longterm' => 15}.each do |term,interval|
             r << metric = MetricResult.new
-            metric.name = "Load average - #{interval} minutes average"
+            metric.name = "Load average - #{interval} minute#{'s' if interval != 1} average"
             metric.tags << 'System/Load Average'
             metric.options[:path] = @files.first
             metric.options[:rra] = term
