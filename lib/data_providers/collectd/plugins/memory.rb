@@ -16,6 +16,8 @@ module DataProvider
             metric.tags << 'System/Memory'
             metric.options[:path] = file
             metric.options[:rra] = 'value'
+            metric.options[:unit] = :bytes
+            metric.options[:minimum] = 0
           end
           r
         end

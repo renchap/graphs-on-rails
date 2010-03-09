@@ -19,6 +19,7 @@ module DataProvider
             metric.tags << 'System/Load Average'
             metric.options[:path] = @files.first
             metric.options[:rra] = term
+            metric.options[:minimum] = 0
           end
           r
         end
