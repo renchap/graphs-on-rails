@@ -1,5 +1,6 @@
 %h2 #{link_to(@metric.host.name, @metric.host)} / #{@metric.name}
 #graph{:style => "width: 800px; height: 300px;"}
+#graph_legend
 :javascript
   $(function () {
     var unitFunctions = {

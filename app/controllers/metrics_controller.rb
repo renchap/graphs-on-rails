@@ -10,6 +10,7 @@ class MetricsController < ApplicationController
         result[:options] = Hash.new
         result[:options][:lines] = { :show => :true, :fill => :true}
         result[:options][:xaxis] = { :mode => :time }
+        result[:options][:legend] = { :container => '#graph_legend'}
         result[:options][:yaxis] = Hash.new
         result[:options][:yaxis][:min] = @metric.options[:minimum] if @metric.options[:minimum]
         result[:options][:yaxis][:tickFormatter] = @metric.options[:unit] if @metric.options[:unit]
