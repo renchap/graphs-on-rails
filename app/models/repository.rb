@@ -1,3 +1,5 @@
+Object.class_eval { |c| undef_method :type } if Object.respond_to?(:type)
+
 class Repository < ActiveRecord::Base
   self.inheritance_column = 'subclass_type'
   has_many :metrics
