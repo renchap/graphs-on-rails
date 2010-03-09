@@ -1,8 +1,8 @@
 # Graphs on Rails
 
-Graphs on Rails is a WebUI to display all your monitoring graphs. It can handle data from different sources (named Data Providers.
+Graphs on Rails is a WebUI to display all your monitoring graphs. It can handle data from different sources (named Data Providers).
 
-You can look at a demo here : http://graphs-on-rails.renchap.com/
+You can look at [a demo here](http://graphs-on-rails.renchap.com/)
 
 The application is written in Ruby, using the Ruby on Rails 3 framework (currently in bêta). The graphs rendering is done using the Flot Javascript library and jQuery.
 
@@ -55,7 +55,7 @@ Repositories, hosts and metrics should now show up in the WebUI.
 
 ## Contributing
 
-Feel free to contribute to the project. Please fork it, create a ticket describing what you want to do on GitHub (http://github.com/renchap/graphs-on-rails/issues) and send a pull request when the job is done.
+Feel free to contribute to the project. Please fork it, create a ticket describing what you want to do on [GitHub](http://github.com/renchap/graphs-on-rails/issues) and send a pull request when the job is done.
 
 ## Credits
 
