@@ -2,29 +2,29 @@
 #graph{:style => "width: 800px; height: 300px;"}
 :javascript
   $(function () {
-    function suffixFormatter(val, axis) {
-      if (val > 1000000000000)
-        return (val / 1000000000000).toFixed(axis.tickDecimals) + " TB";
-      else if (val > 1000000000)
-        return (val / 1000000000).toFixed(axis.tickDecimals) + " GB";
-      else if (val > 1000000)
-        return (val / 1000000).toFixed(axis.tickDecimals) + " MB";
-      else if (val > 1000)
-        return (val / 1000).toFixed(axis.tickDecimals) + " kB";
-      else
-        return val.toFixed(axis.tickDecimals) + " B";
-    }
-    
-    var options = {
-        lines: { show: true, fill: true },
-        xaxis: { mode: "time" },
-        //yaxis: { tickFormatter: suffixFormatter }
+    var unitFunctions = {
+      bytes: function(val, axis) {
+        if (val > 1000000000000)
+          return (val / 1000000000000).toFixed(axis.tickDecimals) + " TB";
+        else if (val > 1000000000)
+          return (val / 1000000000).toFixed(axis.tickDecimals) + " GB";
+        else if (val > 1000000)
+          return (val / 1000000).toFixed(axis.tickDecimals) + " MB";
+        else if (val > 1000)
+          return (val / 1000).toFixed(axis.tickDecimals) + " kB";
+        else
+          return val.toFixed(axis.tickDecimals) + " B";
+      }
     };
+    
     var placeholder = $("#graph");
 
     function fetchData() {
-      function onDataReceived(series) {
-          $.plot(placeholder, [series], options);
+      function onDataReceived(result) {
+        if(result['options']['yaxis']['tickFormatter'])
+          result['options']['yaxis']['tickFormatter'] = unitFunctions[result['options']['yaxis']['tickFormatter']];
+
+        $.plot(placeholder, result['series'], result['options']);
       }
     
       $.ajax({
