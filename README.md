@@ -47,8 +47,8 @@ export RAILS_ENV=production	# Work in production environment
 bundle install		# Install all required gems
 rake db:setup			# Create the database
 rails console			# Enter the rails console
-> r = Repository.new(:name => 'name', :type => 'collectd', :path => '/path/to/collectd/rrds').save # Create a collectd repository
-> r.scan			# Scan the repository and import metrics
+> Repository.new(:name => 'name', :type => 'collectd', :path => '/path/to/collectd/rrds').save # Create a collectd repository
+> Repository.first.scan		# Scan the repository and import metrics
 </pre>
 
 Repositories, hosts and metrics should now show up in the WebUI.
