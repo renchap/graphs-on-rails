@@ -57,6 +57,10 @@ Repositories, hosts and metrics should now show up in the WebUI.
 
 Feel free to contribute to the project. Please fork it, create a ticket describing what you want to do on [GitHub](http://github.com/renchap/graphs-on-rails/issues) and send a pull request when the job is done.
 
+## Licence
+
+Graphs on Rails is released under the MIT Licence. You can find the terms of the MIT licence in the MIT-LICENCE file included with the source code.
+
 ## Credits
 
 * Renaud Chaput (renchap)
