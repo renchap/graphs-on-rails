@@ -17,7 +17,7 @@ module DataProvider
             r << metric = MetricResult.new
             metric.name = "Load average - #{interval} minute#{'s' if interval != 1} average"
             metric.tags << 'System/Load Average'
-            metric.options[:path] = @files.first
+            metric.options[:path] = @files.first[:relative_path]
             metric.options[:rra] = term
             metric.options[:minimum] = 0
           end

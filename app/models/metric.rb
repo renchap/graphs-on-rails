@@ -8,6 +8,6 @@ class Metric < ActiveRecord::Base
   end
   
   def get_data(start_date,end_date)
-    self.repository.data_provider.get_data(start_date, end_date, self.options)
+    self.repository.data_provider.get_data(start_date, end_date, self.options, self.repository.options)
   end
 end

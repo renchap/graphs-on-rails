@@ -3,6 +3,7 @@ Object.class_eval { |c| undef_method :type } if Object.respond_to?(:type)
 class Repository < ActiveRecord::Base
   self.inheritance_column = 'subclass_type'
   has_many :metrics
+  serialize :options
   
   def self.from_param(param)
     find(param)
@@ -33,7 +34,7 @@ class Repository < ActiveRecord::Base
     unless @data_provider
       require File.expand_path("../../../lib/data_providers/#{self.type}/#{self.type}", __FILE__)
       klass = DataProvider.from_shortname(self.type)
-      @data_provider = klass.new(self.path)
+      @data_provider = klass.new(self.options)
     end
     @data_provider
   end
