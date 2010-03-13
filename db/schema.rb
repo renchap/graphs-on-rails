@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100306153400) do
+ActiveRecord::Schema.define(:version => 20100313080009) do
 
   create_table "hosts", :force => true do |t|
     t.string   "name"
@@ -29,10 +29,10 @@ ActiveRecord::Schema.define(:version => 20100306153400) do
 
   create_table "repositories", :force => true do |t|
     t.string   "name"
-    t.string   "path"
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "options"
   end
 
   create_table "tags", :force => true do |t|
