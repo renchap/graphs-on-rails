@@ -3,8 +3,9 @@ require File.expand_path('../../rrdtool/rrdtool', __FILE__)
 module DataProvider
   module Collectd
     class Provider < RRDTool::Provider
-      def initialize(path)
-        @path = path
+      def initialize(options)
+        @options = options
+        @path = @options[:path]
         
         self.load_plugins(__FILE__)
       end
