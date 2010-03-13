@@ -14,19 +14,25 @@ module DataProvider
         result = Hash.new
         # Each dir is an host
         Dir.foreach(@path) do |host|
-          host_path = @path+'/'+host
+          rel_host_path = host
+          host_path = @path+'/'+rel_host_path
           if File.directory?(host_path) and not host =~ /^\./
             host_metrics = Array.new
             # Each dir is a plugin
             Dir.foreach(host_path) do |plugin|
-              plugin_path = host_path+'/'+plugin
+              rel_plugin_path = rel_host_path+'/'+plugin
+              plugin_path = @path+'/'+rel_plugin_path
               if File.directory?(plugin_path) and not plugin =~ /^\./
                 plugin_files = Array.new
                 Dir.foreach(plugin_path) do |file|
-                  file_path = plugin_path+'/'+file
+                  rel_file_path = rel_plugin_path+'/'+file
+                  file_path = @path+'/'+rel_file_path
                   if File.file?(file_path) and file =~ /\.rrd$/
                     # This is an rrd data file
-                    plugin_files << file_path
+                    plugin_files << {
+                      :full_path => file_path,
+                      :relative_path => rel_file_path
+                    }
                   end
                 end
                 
@@ -48,8 +54,8 @@ module DataProvider
         result
       end
       
-      def get_data(start_date, end_date, options)
-        rrd = RRD::Base.new(options[:path])
+      def get_data(start_date, end_date, options, repository_options)
+        rrd = RRD::Base.new(repository_options[:path]+options[:path])
         results = rrd.fetch(:average, :start => start_date, :end => end_date)
         r = Array.new
         

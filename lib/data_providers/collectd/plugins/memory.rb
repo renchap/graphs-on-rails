@@ -12,9 +12,9 @@ module DataProvider
           r = Array.new
           @files.each do |file|
             r << metric = MetricResult.new
-            metric.name = "Memory "+File.basename(file, '.rrd').split('-')[1]
+            metric.name = "Memory "+File.basename(file[:full_path], '.rrd').split('-')[1]
             metric.tags << 'System/Memory'
-            metric.options[:path] = file
+            metric.options[:path] = file[:relative_path]
             metric.options[:rra] = 'value'
             metric.options[:unit] = :bytes
             metric.options[:minimum] = 0
