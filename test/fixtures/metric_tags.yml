@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  metric_id: 1
+  tag_id: 1
+
+two:
+  metric_id: 1
+  tag_id: 1

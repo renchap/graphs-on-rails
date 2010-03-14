@@ -1,6 +1,10 @@
 class Metric < ActiveRecord::Base
   belongs_to :host
   belongs_to :repository
+
+  has_many :metric_tags
+  has_many :tags, :through => :metric_tags
+  
   serialize :options
   
   def self.from_param(param)
