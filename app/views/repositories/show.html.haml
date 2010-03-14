@@ -5,4 +5,4 @@
     Options:
     %ul
       - @repository.options.each do |name, value|
-        %li= "#{name.capitalize}: #{value}"
+        %li= "#{name.to_s.capitalize}: #{value}"
