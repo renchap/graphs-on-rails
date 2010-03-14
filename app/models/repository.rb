@@ -23,8 +23,14 @@ class Repository < ActiveRecord::Base
         end
         m.name = metric.name
         m.options = metric.options
+
+        m.tags.delete_all
+        metric.tags.each do |tag_path|
+          tag = Tag.find_or_create_by_path(tag_path)
+          m.tags << tag
+        end
+
         m.save
-        # TODO: Handle tags
       end
     end
   end
