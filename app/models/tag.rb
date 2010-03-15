@@ -5,6 +5,20 @@ class Tag < ActiveRecord::Base
   has_many :metric_tags
   has_many :metrics, :through => :metric_tags
 
+  def path 
+    list = Array.new
+    tag = self
+    until !tag
+      list << tag
+      tag = tag.parent
+    end
+    list.reverse
+  end
+
+  def string_path
+    self.path.map { |a| a.name }.join('/')
+  end
+
   def self.find_or_create_by_path(path)
     # Split the path into tags
     tags = path.split('/')

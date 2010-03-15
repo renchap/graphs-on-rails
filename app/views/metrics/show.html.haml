@@ -39,3 +39,9 @@
     fetchData();
     
   })
+.tags
+  %h3 Tags
+  %ul
+    - @metric.tags.each do |tag|
+      %li= pretty_tag_path(tag)
+
