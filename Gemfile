@@ -17,9 +17,7 @@ end
 # Rails has selected sqlite3.
 gem "sqlite3-ruby", :require => "sqlite3"
 
-group :test do
-  gem "rcov"
-end
+gem "rails_code_qa"
 
 ## Bundle the gems you use:
 # gem "bj"
