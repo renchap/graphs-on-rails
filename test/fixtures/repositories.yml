@@ -1,11 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyText
-  path: MyText
-  type: MyText
+collectd:
+  name: Collectd Repos
+  type: collectd
+  options:
+    path: /tmp/test
 
-two:
-  name: MyText
-  path: MyText
-  type: MyText
+
