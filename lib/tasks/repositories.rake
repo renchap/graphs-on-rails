@@ -1,5 +1,5 @@
 namespace "repositories" do
-    desc "Import to database all characters and items that need it"
+    desc "Scan all repositories"
     task :scan => :environment do
 
         repositories = Repository.where()
