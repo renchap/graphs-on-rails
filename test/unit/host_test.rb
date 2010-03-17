@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class HostTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "getting an host from url param" do
+    host = hosts(:host1)
+    assert_equal host, Host.from_param(host.id)
   end
 end

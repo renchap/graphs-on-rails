@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 system:
-  parent_id: nil
+#  parent: nil
   name: System
 
 memory:
-  parent_id: system
+  parent: system
   name: Memory
