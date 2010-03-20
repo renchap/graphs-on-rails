@@ -1,4 +1,4 @@
 %h2 Hosts
-%ul
+%ul.hosts
   - @hosts.each do |host|
-    %li= link_to(host.name, host)
+    %li.host= link_to(host.name, host)

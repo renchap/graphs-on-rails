@@ -1,3 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+load:
+  name: Load Average
+  host: host1
+  repository: collectd
+  unique_id: host1_memory
 
+memory:
+  name: Memory
+  host: host1
+  repository: collectd
+  unique_id: host1_memory

@@ -2,6 +2,6 @@
 
 #metrics
   %h3 Metrics
-  %ul
-  - @host.metrics.each do |metric|
-    %li= link_to(metric.name, metric)
+  %ul.metrics
+    - @host.metrics.each do |metric|
+      %li.metric= link_to(metric.name, metric)
