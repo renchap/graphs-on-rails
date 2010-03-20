@@ -1,4 +1,4 @@
 %h2 Repositories
-%ul
+%ul.repositories
   - @repositories.each do |repository|
-    %li= link_to(repository.name, repository)
+    %li.repository= link_to(repository.name, repository)
