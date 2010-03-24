@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class MetricTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "getting a metric from url param" do
+    metric = metrics(:memory)
+    assert_equal metric, Metric.from_param(metric.id)
   end
 end
