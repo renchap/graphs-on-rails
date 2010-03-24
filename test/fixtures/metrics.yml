@@ -5,9 +5,14 @@ load:
   host: host1
   repository: collectd
   unique_id: host1_memory
+  options:
+    minimum: 0
 
 memory:
   name: Memory
   host: host1
   repository: collectd
   unique_id: host1_memory
+  options:
+    minimum: 0
+    unit: bytes
