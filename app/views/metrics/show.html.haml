@@ -39,6 +39,8 @@
     fetchData();
     
   })
+.repository
+  Source repository: #{link_to @metric.repository.name, @metric.repository}
 .tags
   %h3 Tags
   %ul
