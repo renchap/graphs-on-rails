@@ -1,6 +1,9 @@
 %h2 #{link_to(@metric.host.name, @metric.host)} / #{@metric.name}
 #graph{:style => "width: 800px; height: 300px;"}
 #graph_legend
+#controls
+  %input#refresh{:type => "checkbox", :checked => true}
+  Refresh graph every 10s
 :javascript
   $(function () {
     var unitFunctions = {
@@ -18,14 +21,17 @@
       }
     };
     
-    var placeholder = $("#graph");
+    var graph = $("#graph");
+    var overview = $("#overview");
+
+    var refresh_timeout;
 
     function fetchData() {
       function onDataReceived(result) {
         if(result['options']['yaxis']['tickFormatter'])
           result['options']['yaxis']['tickFormatter'] = unitFunctions[result['options']['yaxis']['tickFormatter']];
 
-        $.plot(placeholder, result['series'], result['options']);
+        $.plot(graph, result['series'], result['options']);
       }
     
       $.ajax({
@@ -34,9 +40,25 @@
           dataType: 'json',
           success: onDataReceived
       });
-      setTimeout(fetchData, 10000);
+
+      // If refresh is checked, register for the next check
+      if($('#refresh').attr('checked')) {
+        refresh_timeout = setTimeout(fetchData, 10000);
+      }
     }
-    fetchData();
+
+    $('#refresh').change(function() {
+      if($('#refresh').attr('checked')) {
+        fetchData();
+      } else {
+        clearTimeout(refresh_timeout);
+      }
+    })
+
+    // Fetch the data the first time
+    if($('#refresh').attr('checked')) {
+      fetchData();
+    }
     
   })
 .repository
