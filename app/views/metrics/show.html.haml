@@ -9,13 +9,13 @@
   $(function () {
     var unitFunctions = {
       bytes: function(val, axis) {
-        if (val > 1000000000000)
+        if (val >= 1000000000000)
           return (val / 1000000000000).toFixed(axis.tickDecimals) + " TB";
-        else if (val > 1000000000)
+        else if (val >= 1000000000)
           return (val / 1000000000).toFixed(axis.tickDecimals) + " GB";
-        else if (val > 1000000)
+        else if (val >= 1000000)
           return (val / 1000000).toFixed(axis.tickDecimals) + " MB";
-        else if (val > 1000)
+        else if (val >= 1000)
           return (val / 1000).toFixed(axis.tickDecimals) + " kB";
         else
           return val.toFixed(axis.tickDecimals) + " B";
@@ -24,7 +24,7 @@
 
     function buildOptions(metricOptions, globalOptions) {
       if(yaxis = metricOptions['yaxis']) {
-        if(yaxis['min']) {
+        if(yaxis['min'] != null) {
           globalOptions['yaxis']['min'] = yaxis['min'];
         }
         if(yaxis['tickFormatter']) {
@@ -42,7 +42,7 @@
     var graphOptions = {
       lines: { show: true, fill: true },
       xaxis: { mode: 'time' },
-      yaxis: { labelWidth: 53 },
+      yaxis: { labelWidth: 53, tickDecimals: 2 },
       legend: { container: '#graph_legend' },
       grid: { aboveData: true }
     };
