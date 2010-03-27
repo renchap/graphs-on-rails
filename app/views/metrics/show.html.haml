@@ -1,5 +1,6 @@
 %h2 #{link_to(@metric.host.name, @metric.host)} / #{@metric.name}
-#graph{:style => "width: 800px; height: 300px;"}
+#graph{:style => "width: 800px; height: 300px; "}
+#overview{:style => "width: 800px; height: 70px; "}
 #graph_legend
 #controls
   %input#refresh{:type => "checkbox", :checked => true}
@@ -20,18 +21,49 @@
           return val.toFixed(axis.tickDecimals) + " B";
       }
     };
+
+    function buildOptions(metricOptions, globalOptions) {
+      if(yaxis = metricOptions['yaxis']) {
+        if(yaxis['min']) {
+          globalOptions['yaxis']['min'] = yaxis['min'];
+        }
+        if(yaxis['tickFormatter']) {
+          globalOptions['yaxis']['tickFormatter'] = unitFunctions[yaxis['tickFormatter']];
+        }
+      }
+      return globalOptions;
+    }
     
     var graph = $("#graph");
     var overview = $("#overview");
 
     var refresh_timeout;
 
+    var graphOptions = {
+      lines: { show: true, fill: true },
+      xaxis: { mode: 'time' },
+      yaxis: { labelWidth: 53 },
+      legend: { container: '#graph_legend' },
+      grid: { aboveData: true }
+    };
+
+    var overviewOptions = {
+      shadowSize: 0,
+      lines: { show: true, fill: true },
+      xaxis: { mode: 'time', ticks: [] },
+      yaxis: { ticks: [], labelWidth: 53 },
+      legend: { show: false },
+      grid: { aboveData: true }
+    };
+
     function fetchData() {
       function onDataReceived(result) {
-        if(result['options']['yaxis']['tickFormatter'])
-          result['options']['yaxis']['tickFormatter'] = unitFunctions[result['options']['yaxis']['tickFormatter']];
 
-        $.plot(graph, result['series'], result['options']);
+        // Draw the main graph
+        $.plot(graph, result['series'], buildOptions(result['options'], graphOptions));
+
+        // Draw the overview
+        $.plot(overview, result['series'],  buildOptions(result['options'], overviewOptions));
       }
     
       $.ajax({
