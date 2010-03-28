@@ -4,7 +4,12 @@
 #graph_legend
 #controls
   %input#refresh{:type => "checkbox", :checked => true}
-  Refresh graph every 10s
+  Refresh graph every 
+  %select#refresh_time
+    %option{:value => 10} 10 seconds
+    %option{:value => 1*60, :selected => true} 1 minute
+    %option{:value => 5*60} 5 minutes
+    %option{:value => 10*60} 10 minutes
 :javascript
   $(function () {
     var unitFunctions = {
@@ -96,7 +101,7 @@
 
       // If refresh is checked, register for the next check
       if($('#refresh').attr('checked')) {
-        refresh_timeout = setTimeout(fetchData, 10000);
+        refresh_timeout = setTimeout(fetchData, 1000*$('select#refresh_time').val());
       }
     }
 
