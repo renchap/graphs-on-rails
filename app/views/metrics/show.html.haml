@@ -111,7 +111,14 @@
       } else {
         clearTimeout(refresh_timeout);
       }
-    })
+    });
+
+    $('#refresh_time').change(function() {
+      if($('#refresh').attr('checked')) {
+        clearTimeout(refresh_timeout);
+        fetchData();
+      }
+    });
 
     // Fetch the data the first time
     if($('#refresh').attr('checked')) {
