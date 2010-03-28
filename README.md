@@ -46,7 +46,7 @@ Once the webserver is setup, folow these steps :
 $ export RAILS_ENV=production	# Work in production environment
 $ bundle install		# Install all required gems
 $ rake db:setup			# Create the database
-$ rails console			# Enter the rails console
+$ ./script/rails console	# Enter the rails console. Need to use script/rails in place of rails because Rails 3 can be installed using Bundler.
 > r = Repository.new(:name => 'name', :type => 'collectd', :options => { :path => '/path/to/collectd/rrds' }) # Create a collectd repository
 > r.save			# Save it do database
 > exit				# Return to shell
