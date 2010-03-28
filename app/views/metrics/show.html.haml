@@ -22,16 +22,12 @@
       }
     };
 
-    function buildOptions(metricOptions, globalOptions) {
+    function processOptions(metricOptions) {
       if(yaxis = metricOptions['yaxis']) {
-        if(yaxis['min'] != null) {
-          globalOptions['yaxis']['min'] = yaxis['min'];
-        }
         if(yaxis['tickFormatter']) {
-          globalOptions['yaxis']['tickFormatter'] = unitFunctions[yaxis['tickFormatter']];
+          metricOptions['yaxis']['tickFormatter'] = unitFunctions[yaxis['tickFormatter']];
         }
       }
-      return globalOptions;
     }
     
     var graph = $("#graph");
@@ -53,17 +49,42 @@
       xaxis: { mode: 'time', ticks: [] },
       yaxis: { ticks: [], labelWidth: 53 },
       legend: { show: false },
-      grid: { aboveData: true }
+      grid: { aboveData: true },
+      selection: { mode: "x" },
     };
+
+    var current_ranges = null;
 
     function fetchData() {
       function onDataReceived(result) {
+        processOptions(result['options']);
 
         // Draw the main graph
-        $.plot(graph, result['series'], buildOptions(result['options'], graphOptions));
+        var graph_plot = $.plot(graph, result['series'], $.extend(true, {}, graphOptions, result['options']));
 
         // Draw the overview
-        $.plot(overview, result['series'],  buildOptions(result['options'], overviewOptions));
+        var overview_plot = $.plot(overview, result['series'], $.extend(true, {}, overviewOptions, result['options']));
+        
+        if(current_ranges != null) {
+          overview_plot.setSelection(current_ranges, true);
+        }
+        
+        overview.bind("plotselected", function (event, ranges) {
+          current_ranges = ranges;
+          // do the zooming
+          $.extend(true, graphOptions, {
+            xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to }
+          });
+          plot = $.plot(graph, result['series'], $.extend(true, {}, graphOptions, result['options']));
+        });
+
+        overview.bind("plotunselected", function(event) {
+          current_ranges = null;
+          $.extend(true, graphOptions, {
+            xaxis: { min: null, max: null }
+          });
+          plot = $.plot(graph, result['series'], $.extend(true, {}, graphOptions, result['options']));
+        });
       }
     
       $.ajax({
