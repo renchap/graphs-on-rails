@@ -1,6 +1,9 @@
 %h2 #{link_to(@metric.host.name, @metric.host)} / #{@metric.name}
-#graph{:style => "width: 800px; height: 300px; "}
-#overview{:style => "width: 800px; height: 70px; "}
+#graph{:style => "width: 800px; height: 300px;"}
+#overview{:style => "width: 800px; height: 70px;"}
+#last_update
+  Last Update :
+  %span#last_update_time Never
 #graph_legend
 #controls
   %input#refresh{:type => "checkbox", :checked => true}
@@ -51,7 +54,7 @@
     var overviewOptions = {
       shadowSize: 0,
       lines: { show: true, fill: true },
-      xaxis: { mode: 'time', ticks: [] },
+      xaxis: { mode: 'time' },
       yaxis: { ticks: [], labelWidth: 53 },
       legend: { show: false },
       grid: { aboveData: true },
@@ -69,6 +72,10 @@
 
         // Draw the overview
         var overview_plot = $.plot(overview, result['series'], $.extend(true, {}, overviewOptions, result['options']));
+
+        // Display the last update time
+        time = new Date
+        $('#last_update_time').html(time.getHours()+':'+time.getMinutes()+':'+time.getSeconds())
         
         if(current_ranges != null) {
           overview_plot.setSelection(current_ranges, true);
