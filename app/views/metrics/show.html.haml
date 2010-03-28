@@ -1,37 +1,102 @@
 %h2 #{link_to(@metric.host.name, @metric.host)} / #{@metric.name}
 #graph{:style => "width: 800px; height: 300px;"}
+#overview{:style => "width: 800px; height: 70px;"}
+#last_update
+  Last Update :
+  %span#last_update_time Never
 #graph_legend
 #controls
   %input#refresh{:type => "checkbox", :checked => true}
-  Refresh graph every 10s
+  Refresh graph every 
+  %select#refresh_time
+    %option{:value => 10} 10 seconds
+    %option{:value => 1*60, :selected => true} 1 minute
+    %option{:value => 5*60} 5 minutes
+    %option{:value => 10*60} 10 minutes
 :javascript
   $(function () {
     var unitFunctions = {
       bytes: function(val, axis) {
-        if (val > 1000000000000)
+        if (val >= 1000000000000)
           return (val / 1000000000000).toFixed(axis.tickDecimals) + " TB";
-        else if (val > 1000000000)
+        else if (val >= 1000000000)
           return (val / 1000000000).toFixed(axis.tickDecimals) + " GB";
-        else if (val > 1000000)
+        else if (val >= 1000000)
           return (val / 1000000).toFixed(axis.tickDecimals) + " MB";
-        else if (val > 1000)
+        else if (val >= 1000)
           return (val / 1000).toFixed(axis.tickDecimals) + " kB";
         else
           return val.toFixed(axis.tickDecimals) + " B";
       }
     };
+
+    function processOptions(metricOptions) {
+      if(yaxis = metricOptions['yaxis']) {
+        if(yaxis['tickFormatter']) {
+          metricOptions['yaxis']['tickFormatter'] = unitFunctions[yaxis['tickFormatter']];
+        }
+      }
+    }
     
     var graph = $("#graph");
     var overview = $("#overview");
 
     var refresh_timeout;
 
+    var graphOptions = {
+      lines: { show: true, fill: true },
+      xaxis: { mode: 'time' },
+      yaxis: { labelWidth: 53, tickDecimals: 2 },
+      legend: { container: '#graph_legend' },
+      grid: { aboveData: true }
+    };
+
+    var overviewOptions = {
+      shadowSize: 0,
+      lines: { show: true, fill: true },
+      xaxis: { mode: 'time' },
+      yaxis: { ticks: [], labelWidth: 53 },
+      legend: { show: false },
+      grid: { aboveData: true },
+      selection: { mode: "x" },
+    };
+
+    var current_ranges = null;
+
     function fetchData() {
       function onDataReceived(result) {
-        if(result['options']['yaxis']['tickFormatter'])
-          result['options']['yaxis']['tickFormatter'] = unitFunctions[result['options']['yaxis']['tickFormatter']];
+        processOptions(result['options']);
 
-        $.plot(graph, result['series'], result['options']);
+        // Draw the main graph
+        var graph_plot = $.plot(graph, result['series'], $.extend(true, {}, graphOptions, result['options']));
+
+        // Draw the overview
+        var overview_plot = $.plot(overview, result['series'], $.extend(true, {}, overviewOptions, result['options']));
+
+        // Display the last update time
+        time = new Date
+        $('#last_update_time').html(time.getHours()+':'+time.getMinutes()+':'+time.getSeconds())
+        
+        if(current_ranges != null) {
+          overview_plot.setSelection(current_ranges, true);
+        }
+        
+        overview.bind("plotselected", function (event, ranges) {
+          current_ranges = ranges;
+          // do the zooming
+          $.extend(true, graphOptions, {
+            xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to }
+          });
+          plot = $.plot(graph, result['series'], $.extend(true, {}, graphOptions, result['options']));
+        });
+
+        overview.bind("plotunselected", function(event) {
+          current_ranges = null;
+          $.extend(true, graphOptions, {
+            xaxis: { min: null, max: null }
+          });
+          plot = $.plot(graph, result['series'], $.extend(true, {}, graphOptions, result['options']));
+        });
       }
     
       $.ajax({
@@ -43,7 +108,7 @@
 
       // If refresh is checked, register for the next check
       if($('#refresh').attr('checked')) {
-        refresh_timeout = setTimeout(fetchData, 10000);
+        refresh_timeout = setTimeout(fetchData, 1000*$('select#refresh_time').val());
       }
     }
 
@@ -53,7 +118,14 @@
       } else {
         clearTimeout(refresh_timeout);
       }
-    })
+    });
+
+    $('#refresh_time').change(function() {
+      if($('#refresh').attr('checked')) {
+        clearTimeout(refresh_timeout);
+        fetchData();
+      }
+    });
 
     // Fetch the data the first time
     if($('#refresh').attr('checked')) {
