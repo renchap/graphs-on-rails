@@ -2,9 +2,9 @@
 source 'http://gemcutter.org'
 
 
-gem "rails", "3.0.0.beta3"
+gem "rails", "3.0.7"
 
-gem "haml", "2.2.23"
+gem "haml", "3.1.1"
 
 group :rrd do
   gem "rrd-ffi", :require => "rrd"
