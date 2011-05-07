@@ -107,13 +107,13 @@
       });
 
       // If refresh is checked, register for the next check
-      if($('#refresh').attr('checked')) {
+      if($('#refresh').prop('checked')) {
         refresh_timeout = setTimeout(fetchData, 1000*$('select#refresh_time').val());
       }
     }
 
     $('#refresh').change(function() {
-      if($('#refresh').attr('checked')) {
+      if($('#refresh').prop('checked')) {
         fetchData();
       } else {
         clearTimeout(refresh_timeout);
@@ -121,14 +121,14 @@
     });
 
     $('#refresh_time').change(function() {
-      if($('#refresh').attr('checked')) {
+      if($('#refresh').prop('checked')) {
         clearTimeout(refresh_timeout);
         fetchData();
       }
     });
 
     // Fetch the data the first time
-    if($('#refresh').attr('checked')) {
+    if($('#refresh').prop('checked')) {
       fetchData();
     }
     
