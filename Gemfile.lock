@@ -32,7 +32,7 @@ GEM
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    ffi (1.0.7)
+    ffi (1.0.9)
       rake (>= 0.8.7)
     flay (1.4.1)
       ruby_parser (~> 2.0)
