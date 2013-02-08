@@ -1,8 +1,0 @@
-%h2= 'Repository: ' + @repository.name
-%ul.details
-  %li= "Type: " + @repository.type
-  %li
-    Options:
-    %ul
-      - @repository.options.each do |name, value|
-        %li= "#{name.to_s.capitalize}: #{value}"

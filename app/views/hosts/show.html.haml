@@ -1,7 +1,0 @@
-%h2= 'Host: ' + @host.name
-
-#metrics
-  %h3 Metrics
-  %ul.metrics
-    - @host.metrics.each do |metric|
-      %li.metric= link_to(metric.name, metric)

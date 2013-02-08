@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-collectd:
-  name: Collectd Repos
-  type: collectd
-  options:
-    path: /tmp/test
-
-

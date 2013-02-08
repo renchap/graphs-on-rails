@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-system:
-#  parent: nil
-  name: System
-
-memory:
-  parent: system
-  name: Memory
